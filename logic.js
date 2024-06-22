@@ -266,16 +266,16 @@ function hasLost(){
 
              //This code will check if there are two adjacent tiles. 
             if(
-                //check current tile if it has possible merge to its left
+                //check current tile if it has possible merge to its upper tile
                 r > 0 && board[r-1][c] === currentTile || 
 
-                //check current tile if it has possible merge to its right
+                //check current tile if it has possible merge to its lower tile
                 r < rows - 1 && board[r + 1][c] === currentTile || 
 
-
+                //check current tile if it has possible merge to its left
                 c > 0 && board[r][c-1] === currentTile ||
                 
-                
+                //check current tile if it has possible merge to its right
                 c < rows - 1 && board[r][c + 1] === currentTile){ 
                 
                 //if we found an adjacent tile with the same value as the current tile, false, the title has not lost
