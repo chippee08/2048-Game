@@ -72,15 +72,19 @@ function handleSlide(e){
     if(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.code)){
         if(e.code == "ArrowLeft"){
             slideLeft();
+            setTwo();
         }
         else if(e.code == "ArrowRight"){
             slideRight();
+            setTwo();
         }
         else if(e.code == "ArrowUp"){
             slideUp();
+            setTwo();
         }
         else if(e.code == "ArrowDown"){
             slideDown();
+            setTwo();
         }
     }
 }
@@ -178,7 +182,7 @@ function slideDown(){
 
 function hasEmptytile(){
     for (let r=0; r<rows; r++){
-        for(let c=0; c<columns; c++){
+        for(let c = 0; c < columns; c++){
             if(board[r][c] == 0){
                 return true;
             }
@@ -193,6 +197,7 @@ function setTwo(){
         return
     }
 
+    //these codes is for generating the random 2
     let found = false;
 
     while (found == false){
@@ -201,7 +206,7 @@ function setTwo(){
 
         if(board[r][c] == 0){
             //generate new tile
-            board[r][c] == 2;
+            board[r][c] = 2;
             let tile = document.getElementById(r.toString() + "-" + c.toString());
             tile.innerText = "2";
             tile.classList.add("x2");
