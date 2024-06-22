@@ -10,7 +10,7 @@ function setGame(){
 
     //initializes the 4x4 game board with all tiles set to 0.
     board = [
-        [0, 0, 0, 0],
+        [0, 2, 0, 2],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]
@@ -87,17 +87,18 @@ function handleSlide(e){
 
 document.addEventListener("keydown", handleSlide);
 
-
-function filterZero(){
+//This function removes the zeroes from the cols and rows
+function filterZero(row){
     return row.filter(num => num != 0);
 }
 
-function slide(){
+//slide function is the one merging the adjacent tiles
+function slide(row){
     row = filterZero(row);
 
     for(let i = 0; i < row.length - 1; i++){
-        if(row[i] == row[i+1]){
-            row[i] *= 2;
+        if(row[i] == row[i+1]){ // checks if a tile is equal to its adjacent tile
+            row[i] *= 2; //merge - doubles the first tile to merge
             row[i+1] = 0;
         }
     }
@@ -105,10 +106,10 @@ function slide(){
 
     // Add zeroes on the back after merging
 	while(row.length < columns){
-		row.push(0);
+		row.push(0); //[4, 0, 0, 0]
 	}
 
-	return row;
+	return row; //submits the updated row or cols
 }
 
 function slideLeft(){
