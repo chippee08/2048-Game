@@ -10,7 +10,7 @@ function setGame(){
 
     //initializes the 4x4 game board with all tiles set to 0.
     board = [
-        [0, 2, 0, 2],
+        [0, 2, 2, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]
@@ -115,9 +115,27 @@ function slide(row){
 function slideLeft(){
     for(let r = 0; r < rows; r++){
         let row = board[r];
-        row = slide(row);
+        row = slide(row); //we use the slide function so that the slide function will merge the adjacent tiles.
         board[r] = row;
         
+        //after merging, the position and value of the tiles might change, thus it follows that the id, number, color of the tile must be changed.
+        for(let c = 0; c < columns; c++){
+            let tile = document.getElementById(r.toString() + "-" + c.toString());
+            let num = board[r][c];
+            updateTile(tile, num);
+        }
+    }
+}
+
+function slideRight(){
+    for(let r = 0; r < rows; r++){
+        let row = board[r];
+        row.reverse();
+        row = slide(row); //we use the slide function so that the slide function will merge the adjacent tiles.
+        row.reverse();
+        board[r] = row;
+        
+        //after merging, the position and value of the tiles might change, thus it follows that the id, number, color of the tile must be changed.
         for(let c = 0; c < columns; c++){
             let tile = document.getElementById(r.toString() + "-" + c.toString());
             let num = board[r][c];
