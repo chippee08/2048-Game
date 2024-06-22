@@ -251,18 +251,32 @@ function checkWin(){
     }
 }
 
-//this function will check if there is still an empty tile (meaning, there is still a possible move) and it will also check if there is a same tile
+//this function will check if there is still an empty tile (meaning, there is still a possible move) and it will check if there are similar tile beside it. Meaning there is still a possible move
 function hasLost(){
 
     for(let r = 0; r < rows; r++){
         for(let c = 0; c < columns; c++){
             
+
+           //This function
             if(board[r][c] == 0){
                 return false;
             }
             const currentTile = board[r][c];
 
-            if(r > 0 && board[r-1][c] === currentTile || r < rows - 1 && board[r + 1][c] === currentTile || c > 0 && board[r][c-1] === currentTile || c < rows - 1 && board[r][c + 1] === currentTile){
+             //This code will check if there are two adjacent tiles. 
+            if(
+                //check current tile if it has possible merge to its left
+                r > 0 && board[r-1][c] === currentTile || 
+
+                //check current tile if it has possible merge to its right
+                r < rows - 1 && board[r + 1][c] === currentTile || 
+
+
+                c > 0 && board[r][c-1] === currentTile ||
+                
+                
+                c < rows - 1 && board[r][c + 1] === currentTile){ 
                 
                 //if we found an adjacent tile with the same value as the current tile, false, the title has not lost
                 return false;
