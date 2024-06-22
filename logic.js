@@ -63,4 +63,26 @@ function updateTile(tile, num){
 
 window.onload = function(){
     setGame();
+
 }
+
+function handleSlide(e){ 
+    console.log(e.code); //prints out the key that is being pressed
+
+    if(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.code)){
+        if(e.code == "ArrowLeft"){
+            slideLeft();
+        }
+        else if(e.code == "ArrowRight"){
+            slideRight();
+        }
+        else if(e.code == "ArrowUp"){
+            slideUp();
+        }
+        else if(e.code == "ArrowDown"){
+            slideDown();
+        }
+    }
+}
+
+document.addEventListener("keydown", handleSlide);
