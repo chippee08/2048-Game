@@ -221,3 +221,11 @@ function setTwo(){
         }
     }
 }
+
+function checkWin(){
+    for(let r = 0; r < rows; r++){
+        for(let c = 0; c < columns; c++){
+            
+        }
+    }
+}
