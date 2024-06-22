@@ -225,7 +225,18 @@ function setTwo(){
 function checkWin(){
     for(let r = 0; r < rows; r++){
         for(let c = 0; c < columns; c++){
-            
+            if(board[r][c] == 2048 & is2048Exist == false){
+                alert("You win! You got 2048! Lopit mo idolz")
+                is2048Exist = true;
+            }
+            else if(board[r][c] == 4096 & is4096Exist == false){
+                alert("You win! You got 4096! Kaya lodi kita e!")
+                is4096Exist = true;
+            }
+            else if(board[r][c] == 8192 & is8192Exist == false){
+                alert("You win! You got 8192! ANGAS MO TALAGA LODSSSS!")
+                is8192Exist = true;
+            }
         }
     }
 }
