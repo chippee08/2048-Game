@@ -10,10 +10,10 @@ function setGame(){
 
     //initializes the 4x4 game board with all tiles set to 0.
     board = [
-        [0, 2, 2, 0],
         [0, 0, 0, 0],
+        [0, 2, 0, 0],
         [0, 0, 0, 0],
-        [0, 0, 0, 0]
+        [0, 2, 0, 0]
     ]
 
     for(let r=0; r<rows; r++){
@@ -140,6 +140,72 @@ function slideRight(){
             let tile = document.getElementById(r.toString() + "-" + c.toString());
             let num = board[r][c];
             updateTile(tile, num);
+        }
+    }
+}
+
+function slideUp(){
+    for(let c = 0; c < columns; c++){
+        let col = [board[0][c], board[1][c], board[2][c], board[3][c]];
+        col = slide(col);
+
+        //after merging, the position and value of the tiles might change, thus it follows that the id, number, color of the tile must be changed.
+        for(let r = 0; r < columns; r++){
+            board[r][c] = col[r];
+            let tile = document.getElementById(r.toString() + "-" + c.toString());
+            let num = board[r][c];
+            updateTile(tile, num);
+        }
+    }
+}
+
+function slideDown(){
+    for(let c = 0; c < columns; c++){
+        let col = [board[0][c], board[1][c], board[2][c], board[3][c]];
+        col.reverse();
+        col = slide(col);
+        col.reverse();
+
+        //after merging, the position and value of the tiles might change, thus it follows that the id, number, color of the tile must be changed.
+        for(let r = 0; r < columns; r++){
+            board[r][c] = col[r];
+            let tile = document.getElementById(r.toString() + "-" + c.toString());
+            let num = board[r][c];
+            updateTile(tile, num);
+        }
+    }
+}
+
+function hasEmptytile(){
+    for (let r=0; r<rows; r++){
+        for(let c=0; c<columns; c++){
+            if(board[r][c] == 0){
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+function setTwo(){
+    if(hasEmptytile() == false){
+        return
+    }
+
+    let found = false;
+
+    while (found == false){
+        let r = Math.floor(Math.random() * rows);
+        let c = Math.floor(Math.random() * columns);
+
+        if(board[r][c] == 0){
+            //generate new tile
+            board[r][c] == 2;
+            let tile = document.getElementById(r.toString() + "-" + c.toString());
+            tile.innerText = "2";
+            tile.classList.add("x2");
+            found = true;
         }
     }
 }
