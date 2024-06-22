@@ -11,9 +11,9 @@ function setGame(){
     //initializes the 4x4 game board with all tiles set to 0.
     board = [
         [0, 0, 0, 0],
-        [0, 2, 0, 0],
         [0, 0, 0, 0],
-        [0, 2, 0, 0]
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
     ]
 
     for(let r=0; r<rows; r++){
@@ -36,6 +36,9 @@ function setGame(){
             document.getElementById("board").append(tile);
         }
     }
+
+    setTwo();
+    setTwo();
 }
 
 
