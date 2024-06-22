@@ -94,6 +94,15 @@ function handleSlide(e){
             setTwo();
         }
     }
+
+    checkWin();
+    if(hasLost() == true){
+        setTimeout(() => {
+            alert("Game Over! Sayang lods 🥺. Better luck next time");
+            restartGame();
+            alert("Click any arrow key to restart");
+        }, 100) //setTimeout is used to delay 
+    }
 }
 
 document.addEventListener("keydown", handleSlide);
@@ -222,6 +231,7 @@ function setTwo(){
     }
 }
 
+//this function checks if we already have 2048, 4096, or 8192 in our tiles to prompt a window alert congratulating the player
 function checkWin(){
     for(let r = 0; r < rows; r++){
         for(let c = 0; c < columns; c++){
@@ -239,4 +249,37 @@ function checkWin(){
             }
         }
     }
+}
+
+//this function will check if there is still an empty tile (meaning, there is still a possible move) and it will also check if there is a same tile
+function hasLost(){
+
+    for(let r = 0; r < rows; r++){
+        for(let c = 0; c < columns; c++){
+            
+            if(board[r][c] == 0){
+                return false;
+            }
+            const currentTile = board[r][c];
+
+            if(r > 0 && board[r-1][c] === currentTile || r < rows - 1 && board[r + 1][c] === currentTile || c > 0 && board[r][c-1] === currentTile || c < rows - 1 && board[r][c + 1] === currentTile){
+                
+                //if we found an adjacent tile with the same value as the current tile, false, the title has not lost
+                return false;
+            }
+        }
+    } 
+    
+    //No empty tile and no possible moves left (meaning, true, the user already lost)
+    return true;
+
+}
+
+function restartGame(){
+    for(let r = 0; r< rows; r++){
+        for(let c = 0; c < columns; c++){
+            board[r][c] = 0;
+        }
+    }
+    setTwo();
 }
