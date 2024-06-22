@@ -4,6 +4,10 @@ let score = 0;
 let rows = 4;
 let columns = 4;
 
+//These variables will be used to monitor if the user already won in the value of 2048, 4096, or 8192
+let is2048Exist = false;
+let is4096Exist = false;
+let is8192Exist = false;
 
 //function to set the game board
 function setGame(){
