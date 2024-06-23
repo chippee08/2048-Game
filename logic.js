@@ -409,3 +409,48 @@ document.addEventListener('touchmove', (e) =>{
     e.preventDefault();
 }, {passive: false}); //Use passive property to make sure that the preventDefault() will work
 
+
+document.addEventListener('touchend', (e) => {
+    if(!e.target.className.includes("tile")){
+        return
+    }
+
+    let diffX = startX - e.changedTouches[0].clientX;
+    let diffY = startY - e.changedTouches[0].clientY;
+
+    //check if the horizontal swipe is greater in magnitude than the vertical swipe
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+	    // Horizontal swipe
+	    if (diffX > 0) {
+	        slideLeft(); // Call a function for sliding left
+	        setTwo(); // Call a function named "setTwo"
+	    } else {
+	        slideRight(); // Call a function for sliding right
+	        setTwo(); // Call a function named "setTwo"
+	    }
+	}
+    else {
+	    // Vertical swipe
+	    if (diffY > 0) {
+	        slideUp(); // Call a function for sliding up
+	        setTwo(); // Call a function named "setTwo"
+	    } else {
+	        slideDown(); // Call a function for sliding down
+	        setTwo(); // Call a function named "setTwo"
+	    }
+	}
+
+    document.getElementById("score").innerText = score;
+
+	checkWin();
+
+	// Call hasLost() to check for game over conditions
+	if (hasLost()) {
+	    // Use setTimeout to delay the alert
+	    setTimeout(() => {
+	    alert("Game Over! You have lost the game. Game will restart");
+	    restartGame();
+	    alert("Click any key to restart");
+	    }, 100); 
+	}
+});
