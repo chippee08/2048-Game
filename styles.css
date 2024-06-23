@@ -1,10 +1,12 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    color: #0047AB;
 }
 
 hr{
     max-width: 480px;
+    border: 1px solid #B7DFF2;
 }
 
 #board{
