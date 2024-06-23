@@ -9,6 +9,10 @@ let is2048Exist = false;
 let is4096Exist = false;
 let is8192Exist = false;
 
+//declaring variable for touch input
+let startX = 0;
+let startY = 0;
+
 //function to set the game board
 function setGame(){
 
@@ -388,4 +392,20 @@ function restartGame(){
     score = 0;
     setTwo();
 }
+
+//this code will listen when we touch the screen and assigns the x and y coordinates of that touch/event
+// it inputs the x coordinate value to the startX and y corrdinate to startY value to startY
+document.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY
+});
+
+document.addEventListener('touchmove', (e) =>{
+    if(!e.target.className.includes("tile")){
+        return
+    }
+
+    //to disable scrolling feature
+    e.preventDefault();
+}, {passive: false}); //Use passive property to make sure that the preventDefault() will work
 
