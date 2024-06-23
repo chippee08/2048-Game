@@ -95,7 +95,12 @@ function handleSlide(e){
         }
     }
 
-    checkWin();
+    document.getElementById("score").innerText = score;
+
+    setTimeout(() => {
+		checkWin();
+	}, 2000);
+
     if(hasLost() == true){
         setTimeout(() => {
             alert("Game Over! Sayang lods 🥺. Better luck next time");
@@ -120,6 +125,9 @@ function slide(row){
         if(row[i] == row[i+1]){ // checks if a tile is equal to its adjacent tile
             row[i] *= 2; //merge - doubles the first tile to merge
             row[i+1] = 0;
+
+            //this adds the merged tiles into the scores
+            score += row[i];
         }
     }
     row = filterZero(row);
@@ -135,6 +143,9 @@ function slide(row){
 function slideLeft(){
     for(let r = 0; r < rows; r++){
         let row = board[r];
+        
+        //Line for animation
+        let originalRow = row.slice();
         row = slide(row); //we use the slide function so that the slide function will merge the adjacent tiles.
         board[r] = row;
         
@@ -142,6 +153,19 @@ function slideLeft(){
         for(let c = 0; c < columns; c++){
             let tile = document.getElementById(r.toString() + "-" + c.toString());
             let num = board[r][c];
+            
+
+            //Line for animation 
+            if(originalRow[c] !== num && num !== 0){//if the original tile is not equal to the current tile, apply animation 
+                tile.style.animation = "slide-from-right 0.3s";//applies animation
+
+                //removes the animation class after the animation is complete
+            	setTimeout(() => {
+
+            		tile.style.animation = "";
+            		
+            	}, 300);
+            }
             updateTile(tile, num);
         }
     }
@@ -150,6 +174,11 @@ function slideLeft(){
 function slideRight(){
     for(let r = 0; r < rows; r++){
         let row = board[r];
+
+         //Line for animation
+         //this documents the original position of the tile 
+        let originalRow = row.slice();
+
         row.reverse();
         row = slide(row); //we use the slide function so that the slide function will merge the adjacent tiles.
         row.reverse();
@@ -159,6 +188,18 @@ function slideRight(){
         for(let c = 0; c < columns; c++){
             let tile = document.getElementById(r.toString() + "-" + c.toString());
             let num = board[r][c];
+
+            //Line for animation 
+            if(originalRow[c] !== num && num !== 0){//if the original tile is not equal to the current tile, apply animation 
+                tile.style.animation = "slide-from-left 0.3s";//applies animation
+
+                //removes the animation class after the animation is complete
+            	setTimeout(() => {
+
+            		tile.style.animation = "";
+            		
+            	}, 300);
+            }
             updateTile(tile, num);
         }
     }
@@ -167,13 +208,37 @@ function slideRight(){
 function slideUp(){
     for(let c = 0; c < columns; c++){
         let col = [board[0][c], board[1][c], board[2][c], board[3][c]];
+       
+        //Line for animation
+        //this documents the original position of the tile 
+        let originalCol = col.slice();
+
         col = slide(col);
 
+        let changedIndices = [];
+        for(let r = 0; r < rows; r++){
+            if(originalCol[r] !== col[r]){
+                changedIndices.push(r);
+            }
+        }
+
         //after merging, the position and value of the tiles might change, thus it follows that the id, number, color of the tile must be changed.
-        for(let r = 0; r < columns; r++){
+        for(let r = 0; r < rows; r++){
             board[r][c] = col[r];
             let tile = document.getElementById(r.toString() + "-" + c.toString());
             let num = board[r][c];
+
+              //Line for animation 
+              if(changedIndices.includes(r) && num !== 0){
+                tile.style.animation = "slide-from-bottom 0.3s";//applies animation
+
+                //removes the animation class after the animation is complete
+            	setTimeout(() => {
+
+            		tile.style.animation = "";
+            		
+            	}, 300);
+            }
             updateTile(tile, num);
         }
     }
@@ -182,15 +247,40 @@ function slideUp(){
 function slideDown(){
     for(let c = 0; c < columns; c++){
         let col = [board[0][c], board[1][c], board[2][c], board[3][c]];
+
+        //Line for animation
+        //this documents the original position of the tile 
+        let originalCol = col.slice();
+
+
         col.reverse();
         col = slide(col);
         col.reverse();
+
+        let changedIndices = [];
+        for(let r = 0; r < rows; r++){
+            if(originalCol[r] !== col[r]){
+                changedIndices.push(r);
+            }
+        }
 
         //after merging, the position and value of the tiles might change, thus it follows that the id, number, color of the tile must be changed.
         for(let r = 0; r < columns; r++){
             board[r][c] = col[r];
             let tile = document.getElementById(r.toString() + "-" + c.toString());
             let num = board[r][c];
+
+              //Line for animation 
+            if(changedIndices.includes(r) && num !== 0){
+                tile.style.animation = "slide-from-top 0.3s";//applies animation
+
+                //removes the animation class after the animation is complete
+            	setTimeout(() => {
+
+            		tile.style.animation = "";
+            		
+            	}, 300);
+            }
             updateTile(tile, num);
         }
     }
@@ -257,7 +347,6 @@ function hasLost(){
     for(let r = 0; r < rows; r++){
         for(let c = 0; c < columns; c++){
             
-
            //This function
             if(board[r][c] == 0){
                 return false;
@@ -295,5 +384,8 @@ function restartGame(){
             board[r][c] = 0;
         }
     }
+
+    score = 0;
     setTwo();
 }
+

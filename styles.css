@@ -31,65 +31,144 @@ hr{
 
 .x2{
     background-color: #eee4da;
-    color: #727371;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-02);
+    background-size: 100% 100%;
 }
 
 .x4{
     background-color: #ece0ca;
-    color: #727371;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-04);
+    background-size: 100% 100%;
 }
 
 .x8{
     background-color: #f4b17a;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-08);
+    background-size: 100% 100%;
 }
 
 .x16{
     background-color: #f59575;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-16);
+    background-size: 100% 100%;
 }
 
 .x32{
     background-color: #f57c5f;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-32);
+    background-size: 100% 100%;
 }
 
 .x64{
     background-color: #f65d3b;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-64);
+    background-size: 100% 100%;
 }
 
 .x128{
     background-color: #edce71;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-128);
+    background-size: 100% 100%;
 }
 
 .x256{
     background-color: #edcc63;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-256);
+    background-size: 100% 100%;
 }
 
 .x512{
     background-color: #edc651;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-512);
+    background-size: 100% 100%;
 }
 
 .x1024{
     background-color: #eec744;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-1024);
+    background-size: 100% 100%;
 }
 
 .x2048{
     background-color: #eec230;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-2048);
+    background-size: 100% 100%;
 }
 
 .x4096{
     background-color: #fe3d3d;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-4096);
+    background-size: 100% 100%;
 }
 
 .x8192{
     background-color: #ff2020;
-    color: white;
+    color: rgba(0, 0, 0, 0);
+    background-image: var(--background-image-url-8192);
+    background-size: 100% 100%;
+}
+
+/* tile animation */
+@keyframes slide-from-right{
+   0%{
+    transform: translateX(100%);
+   }
+   100%{
+    transform: translateX(0%);
+   }
+}
+
+@keyframes slide-from-left{
+    0%{
+        transform: translateX(-100%);
+       }
+       100%{
+        transform: translateX(0%);
+       }
+}
+
+@keyframes slide-from-top{
+    0%{
+        transform: translateY(-100%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slide-from-bottom{
+    0%{
+        transform: translateY(100%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+:root{
+    --background-image-url-02: url('./img/01-zuitt_2.png');
+    --background-image-url-04: url('./img/02-zuitt_4.png');
+    --background-image-url-08: url('./img/03-zuitt_8.png');
+    --background-image-url-16: url('./img/04-zuitt_16.png');
+    --background-image-url-32: url('./img/05-zuitt_32.png');
+    --background-image-url-64: url('./img/06-zuitt_64.png');
+    --background-image-url-128: url('./img/07-zuitt_128.png');
+    --background-image-url-256: url('./img/08-zuitt_256.png');
+    --background-image-url-512: url('./img/09-zuitt_512.png');
+    --background-image-url-1024: url('./img/10-zuitt_1024.png');
+    --background-image-url-2048: url('./img/11-zuitt_2048.png');
+    --background-image-url-4096: url('./img/12-zuitt_4096.png');
+    --background-image-url-8192: url('./img/13-zuitt_8192.png');
 }
